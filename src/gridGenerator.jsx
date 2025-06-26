@@ -114,27 +114,17 @@ const GridGenerator = () => {
               </div>
             ))}
           </div>
-
-          {gridConfig.items.length === 0 && (
-            <div className="text-center py-8">
-              <p className="text-white/60 mb-2">No items added yet.</p>
-              <p className="text-sm text-white/60">
-                Set the item size in the controls, then click on any grid
-                position to place it.
-              </p>
-            </div>
-          )}
         </div>
 
         {/* Right side - Control Panel */}
-        <div className="w-30 xl:w-80 flex flex-col ">
+        <div className="w-25 xl:w-80 flex flex-col ">
           <h2 className="text-xl font-semibold mb-4">Settings</h2>
 
           {/* Grid Settings */}
           <h3 className="text-lg font-medium text-white/60 mb-1">
             Grid Settings
           </h3>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
             <InputField
               label="Rows"
               name="rows"
@@ -155,7 +145,7 @@ const GridGenerator = () => {
           <div className="h-8"></div>
           <h3 className="text-lg font-medium text-white/60 mb-1">Item Size</h3>
           {/* Item Size Settings */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
             <InputField
               label="Colspan"
               name="colspan"
@@ -177,6 +167,16 @@ const GridGenerator = () => {
           </div>
         </div>
       </div>
+
+      {gridConfig.items.length === 0 && (
+        <div className="text-center py-8">
+          <p className="text-white/60 mb-2">No items added yet.</p>
+          <p className="text-sm text-white/60">
+            Set the item size in the controls, then click on any grid position
+            to place it.
+          </p>
+        </div>
+      )}
 
       {/* Generated Code Section */}
       {gridConfig.items.length > 0 && (

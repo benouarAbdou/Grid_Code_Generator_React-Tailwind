@@ -8,7 +8,7 @@ function App() {
       <img
         src={GitHub}
         alt="GitHub"
-        className="absolute top-0 right-0 w-20 h-20 z-50 cursor-pointer"
+        className="absolute top-0 right-0 w-20 h-20 z-50 cursor-pointer hover:scale-110 transition-transform duration-300"
         onClick={() =>
           window.open(
             "https://github.com/benouarAbdou/Grid_Code_Generator_React-Tailwind",
