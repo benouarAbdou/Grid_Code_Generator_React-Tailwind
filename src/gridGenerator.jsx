@@ -2,8 +2,8 @@ import React from "react";
 import { toast } from "react-hot-toast";
 import InputField from "./components/inputField";
 import useGridGenerator from "./utils/gridUtils"; // adjust path if needed
-import SyntaxHighlighter from "react-syntax-highlighter";
-import anOldHope from "react-syntax-highlighter/dist/esm/styles/hljs/an-old-hope";
+import GeneratedCodeSection from "./components/codeSection"; // Import the new component
+
 const GridGenerator = () => {
   const {
     gridConfig,
@@ -23,7 +23,13 @@ const GridGenerator = () => {
     <div className="container mx-auto p-4 relative">
       {/* GitHub Corner Triangle */}
 
-      <h1 className="text-2xl font-bold mb-6">Clickable Grid Generator</h1>
+      <h1 className="text-3xl lg:text-5xl font-bold mb-6">
+        <span className="cursor-pointer text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-500 to-red-500">
+          Clickable
+        </span>
+        <br />
+        Grid Generator
+      </h1>
 
       {/* Main horizontal layout */}
       <div className="flex gap-8 mb-8">
@@ -100,7 +106,7 @@ const GridGenerator = () => {
                     e.stopPropagation();
                     removeItem(item.id);
                   }}
-                  className="absolute top-1 right-1 w-5 h-5 bg-red-500 text-white rounded-full text-xs flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-600"
+                  className="absolute top-1 right-1 w-5 h-5 cursor-pointer bg-red-500 text-white rounded-full text-xs flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-600"
                   title="Remove item"
                 >
                   ×
@@ -121,9 +127,9 @@ const GridGenerator = () => {
           <h2 className="text-xl font-semibold mb-4">Settings</h2>
 
           {/* Grid Settings */}
-          <h3 className="text-lg font-medium text-white/60 mb-1">
+          <p className="text-sm font-medium text-white/60 mb-4">
             Grid Settings
-          </h3>
+          </p>
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
             <InputField
               label="Rows"
@@ -142,8 +148,8 @@ const GridGenerator = () => {
               className="h-12 w-full"
             />
           </div>
-          <div className="h-8"></div>
-          <h3 className="text-lg font-medium text-white/60 mb-1">Item Size</h3>
+          <div className="h-4"></div>
+          <h3 className="text-sm font-medium text-white/60 mb-4">Item Size</h3>
           {/* Item Size Settings */}
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
             <InputField
@@ -178,46 +184,10 @@ const GridGenerator = () => {
         </div>
       )}
 
-      {/* Generated Code Section */}
-      {gridConfig.items.length > 0 && (
-        <div className="mt-8">
-          <h2 className="text-xl font-semibold mb-4">Generated JSX Code</h2>
-          <div className="mb-4">
-            <button
-              onClick={() => {
-                navigator.clipboard.writeText(generateJSXCode());
-                toast.success("Code copied to clipboard!");
-              }}
-              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
-            >
-              Copy Code
-            </button>
-          </div>
-          <div className="rounded-xl p-4 bg-[#1C1D21]">
-            <div className="relative flex items-center mb-4">
-              <div className="flex space-x-2 absolute left-2">
-                <div className="w-4 h-4 rounded-full bg-[#F31260]"></div>
-                <div className="w-4 h-4 rounded-full bg-[#F5A524]"></div>
-                <div className="w-4 h-4 rounded-full bg-[#17C964]"></div>
-              </div>
-              <p className="mx-auto text-white/60 text-center">
-                GridComponent.jsx
-              </p>
-            </div>
-
-            <SyntaxHighlighter
-              language="javascript"
-              style={anOldHope}
-              wrapLines={true}
-              lineProps={{
-                style: { wordBreak: "break-all", whiteSpace: "pre-wrap" }
-              }}
-            >
-              {generateJSXCode()}
-            </SyntaxHighlighter>
-          </div>
-        </div>
-      )}
+      <GeneratedCodeSection
+        items={gridConfig.items}
+        generateJSXCode={generateJSXCode}
+      />
     </div>
   );
 };
